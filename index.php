@@ -15,12 +15,12 @@ $servers = [
         'user' => 'root',
         'password' => 'jzPRWvds0'
     ],
-/*     [
+    [
         'host' => 'kamenka.su',
         'dbname' => 'test',
         'user' => 'test',
         'password' => 'pp8kgvZQh4b60jWg'
-    ] */
+    ]
 
 ];
 
