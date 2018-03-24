@@ -27,7 +27,7 @@ function prepareTests($servers)
         try {
             printf("%s\tinit\t", $host['host']);
             $tests[] = new PDO('mysql:host=' . $host['host'] . ';dbname=' . $host['dbname'], $host['user'], $host['password']);
-            printf("\tOk!\n");
+            printf("\tOk!" . PHP_EOL);
         } catch (PDOException $e) {
             $tests[] = null;
             printf("\tFailed! -- " . $e->getMessage() . PHP_EOL);
