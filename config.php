@@ -8,7 +8,7 @@ $servers = [
         'host' => '192.168.1.93',
         'dbname' => 'test',
         'user' => 'admin',
-        'password' => 'jzPRWvds0'
+        'password' => 'bpumAhpmyMrMxPNY'
     ],
     [
         'host' => '192.168.1.79',
