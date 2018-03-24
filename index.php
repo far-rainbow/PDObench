@@ -1,28 +1,6 @@
 <?php
-define('COUNT', 1000);
-define('TRANS', false);
 
-$servers = [
-    [
-        'host' => '192.168.1.93',
-        'dbname' => 'test',
-        'user' => 'admin',
-        'password' => 'jzPRWvds0'
-    ],
-    [
-        'host' => 'localhost',
-        'dbname' => 'test2',
-        'user' => 'root',
-        'password' => 'jzPRWvds0'
-    ],
-    [
-        'host' => 'kamenka.su',
-        'dbname' => 'test',
-        'user' => 'test',
-        'password' => 'pp8kgvZQh4b60jWg'
-    ]
-
-];
+require 'config.php';
 
 printf("\nTest DB with truncate table and fill it with %d rows of random values\n\n", COUNT);
 
@@ -38,7 +16,7 @@ foreach ($tests as $idx => $test) :
         $resultMSec = test($test);
         printf("%s\t\t= %.2fs\n", chr(8), $resultMSec);
     } else {
-        printf("NULL\n");
+        printf("Skip...\n");
     }
 endforeach
 ;
@@ -52,7 +30,7 @@ function prepareTests($servers)
             printf("\tOk!\n");
         } catch (PDOException $e) {
             $tests[] = null;
-            printf("\tFailed! \n" . $e->getMessage());
+            printf("\tFailed! -- " . $e->getMessage() . PHP_EOL);
         }
     endforeach
     ;
