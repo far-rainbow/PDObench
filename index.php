@@ -1,13 +1,11 @@
 <?php
 
-<<<<<<< HEAD
-=======
 /*
  *  Заполните config.php и запустите скрипт. 
  *
  **/
 
->>>>>>> refs/remotes/origin/master
+
 require 'config.php';
 
 printf("\nTest DB with truncate table and fill it with %d rows of random values\n\n", COUNT);
