@@ -17,7 +17,7 @@ $servers = [
         'password' => 'CBzLLRDsxAYHJLSs'
     ],
     [
-        'host' => 'kamenka.su',
+        'host' => '88.99.112.21',
         'dbname' => 'test',
         'user' => 'test',
         'password' => 'pp8kgvZQh4b60jWg'
