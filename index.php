@@ -6,9 +6,24 @@
  */
 require 'config.php';
 
-printf("\nTest DB with truncate table and fill it with %d rows of random values\n\n", COUNT);
+/*
+ *===============
+ *
+ * PREPARE TESTS
+ *
+ *===============
+ */
 
+printf("\nTest DB with truncate table and fill it with %d rows of random values\n\n", COUNT);
 $tests = prepareTests($servers);
+
+/*
+ *===============
+ *
+ * EXECUTE TESTS
+ *
+ *===============
+ */
 
 printf("\n================================================================================\n\n");
 
@@ -24,6 +39,14 @@ foreach ($tests as $idx => $test) :
     }
 endforeach
 ;
+
+/*
+*===========
+*
+* FUNCTIONS
+*
+*===========
+*/
 
 function prepareTests($servers)
 {
