@@ -1,11 +1,9 @@
 <?php
 
 /*
- *  Заполните config.php и запустите скрипт. 
+ * Заполните config.php и запустите скрипт.
  *
- **/
-
-
+ */
 require 'config.php';
 
 printf("\nTest DB with truncate table and fill it with %d rows of random values\n\n", COUNT);
@@ -30,30 +28,34 @@ endforeach
 function prepareTests($servers)
 {
     foreach ($servers as $host) :
-        try {
-            printf("%s\tinit\t", $host['host']);
-            $tests[] = new PDO('mysql:host=' . $host['host'] . ';dbname=' . $host['dbname'], $host['user'], $host['password']);
-            printf("\tOk!" . PHP_EOL);
-        } catch (PDOException $e) {
+        if ($host['enabled']) {
+            try {
+                printf("%s\tinit\t", $host['host']);
+                $tests[] = new PDO('mysql:host=' . $host['host'] . ';dbname=' . $host['dbname'], $host['user'], $host['password']);
+                printf("\tOk!" . PHP_EOL);
+            } catch (PDOException $e) {
+                $tests[] = null;
+                printf("\tFailed! -- " . $e->getMessage());
+            }
+        } else {
+            printf("%s\tdisabled\t", $host['host']);
             $tests[] = null;
-            printf("\tFailed! -- " . $e->getMessage() . PHP_EOL);
         }
     endforeach
     ;
-    
     return $tests;
 }
 
 /**
  * Test procedure
- * 
+ *
  * @param PDO $test
  * @return float overall test time in milliseconds
  */
 function test($test)
 {
     if ($test) {
-
+        
         $count = COUNT;
         $timer = microtime(true);
         $anim = array(
@@ -63,10 +65,8 @@ function test($test)
             "\\"
         );
         
-        $test->exec("truncate table a");
-        
-        $rnd = rand(0, 999999);
-        $test->exec("CREATE table b_$rnd like a");
+        tabTruncate('a', $test);
+        tabCreate(rand(0, 999999), $test);
         
         $rnd = null;
         if (TRANS)
@@ -87,10 +87,36 @@ function test($test)
         if (TRANS)
             $test->exec("commit");
         
-        //$r = $test->query("drop table b");
+        // $r = $test->query("drop table b");
         
         return microtime(true) - $timer;
     } else {
         return null;
     }
+}
+
+/**
+ * Create table with random name b_xxxxxx
+ *
+ * @param int $rnd
+ * @param PDO $test
+ * @return bool $ret
+ */
+function tabCreate($rnd, $test)
+{
+    $ret = $test->exec("CREATE table b_$rnd like a; INSERT INTO b_tables (b_table_name) values ('b_$rnd');");
+    return $ret;
+}
+
+/**
+ * Truncate table
+ *
+ * @param string $tabName
+ * @param PDO $test
+ * @return bool $ret
+ */
+function tabTruncate($tabName, $test)
+{
+    $ret = $test->exec("truncate table $tabName");
+    return $ret;
 }
