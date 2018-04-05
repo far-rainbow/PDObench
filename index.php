@@ -29,9 +29,18 @@ function prepareTests($servers)
 {
     foreach ($servers as $host) :
         if ($host['enabled']) {
+            
             try {
                 printf("%s\tinit\t", $host['host']);
-                $tests[] = new PDO('mysql:host=' . $host['host'] . ';dbname=' . $host['dbname'], $host['user'], $host['password']);
+                
+                if ($host['type'] == 'mysql') {
+                    $tests[] = new PDO('mysql:host=' . $host['host'] . ';dbname=' . $host['dbname'], $host['user'], $host['password']);
+                }
+                
+                if ($host['type'] == 'pgsql') {
+                    $tests[] = new PDO('pgsql:host=' . $host['host'] . ';dbname=' . $host['dbname'], $host['user'], $host['password']);
+                }
+                
                 printf("\tOk!" . PHP_EOL);
             } catch (PDOException $e) {
                 $tests[] = null;
