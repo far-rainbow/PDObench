@@ -70,7 +70,7 @@ function prepareTests($servers)
                 printf("\tFailed! -- " . $e->getMessage());
             }
         } else {
-            printf("%s\tdisabled\t", $host['host']);
+            printf("%s\tdisabled\t" . PHP_EOL, $host['host']);
             $tests[] = null;
         }
     endforeach
@@ -136,7 +136,7 @@ function test($test)
  */
 function tabCreate($rnd, $test)
 {
-    $ret = $test->exec("CREATE table b_$rnd like a; INSERT INTO b_tables (b_table_name) values ('b_$rnd');");
+    $ret = $test->exec("CREATE table b_$rnd (like a); INSERT INTO b_tables (b_table_name) values ('b_$rnd');");
     return $ret;
 }
 
@@ -149,6 +149,6 @@ function tabCreate($rnd, $test)
  */
 function tabTruncate($tabName, $test)
 {
-    $ret = $test->exec("truncate table $tabName");
+    $ret = $test->exec("truncate table $tabName; alter sequence id restart");
     return $ret;
 }

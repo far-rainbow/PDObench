@@ -1,7 +1,7 @@
 <?php
 
-define('COUNT', 256);
-define('TRANS', true);
+define('COUNT', 1024);
+define('TRANS', false);
 
 $servers = [
     [
@@ -27,6 +27,14 @@ $servers = [
         'user' => 'test',
         'password' => 'pp8kgvZQh4b60jWg',
         'enabled' => false
+    ],
+    [
+        'type' => 'pgsql',
+        'host' => '192.168.1.93',
+        'dbname' => 'test',
+        'user' => 'test',
+        'password' => 'pp8kgvZQh4b60jWg',
+        'enabled' => true
     ]
     
 ];
