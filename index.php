@@ -61,7 +61,7 @@ function prepareTests($servers)
                 }
                 
                 if ($host['type'] == 'pgsql') {
-                    $tests[] = new PDO('pgsql:host=' . $host['host'] . ';dbname=' . $host['dbname'], $host['user'], $host['password']);
+                    $tests[] = new PDO('pgsql:host=' . $host['host'] . ';port=' . $host['port'] . ';dbname=' . $host['dbname'], $host['user'], $host['password']);
                 }
                 
                 printf("\tOk!" . PHP_EOL);
