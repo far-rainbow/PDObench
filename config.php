@@ -14,7 +14,8 @@ $servers = [
     ],
     [
         'type' => 'pgsql',
-        'host' => '95.216.144.125:5433',
+        'host' => '95.216.144.125',
+        'port' => '5433',
         'dbname' => 'test',
         'user' => 'test',
         'password' => 'pp8kgvZQh4b60jWg',
